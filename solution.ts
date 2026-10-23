@@ -414,3 +414,52 @@ var reverseString = function (s: string[]): void {
     right--;
   }
 };
+
+// ------------------------------------------------------------
+// Problem 19: Length of Last Word
+// Trim trailing spaces, then count characters from the end
+// until the next space. This naturally skips leading spaces
+// and any multiple/extra spaces between words.
+//
+// Time:  O(n)
+// Space: O(1)
+// ------------------------------------------------------------
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLastWord = function (s: string): number {
+  let i = s.length - 1;
+  while (i >= 0 && s[i] === ' ') i--; // skip trailing spaces
+  let count = 0;
+  while (i >= 0 && s[i] !== ' ') {
+    count++;
+    i--;
+  }
+  return count;
+};
+
+// ------------------------------------------------------------
+// Problem 20: Longest Common Prefix
+// Start from the first string as the candidate prefix, then
+// shrink it until every string starts with it. Short-circuit
+// on an empty string.
+//
+// Time:  O(S) — S = sum of all characters across all strings
+// Space: O(1) extra (the returned prefix is the result)
+// ------------------------------------------------------------
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function (strs: string[]): string {
+  if (strs.length === 0) return '';
+  let prefix = strs[0];
+  for (let i = 1; i < strs.length; i++) {
+    while (strs[i].indexOf(prefix) !== 0) {
+      prefix = prefix.slice(0, -1);
+      if (prefix === '') return '';
+    }
+  }
+  return prefix;
+};
