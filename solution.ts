@@ -175,3 +175,72 @@ var fizzBuzz = function (n: number): string[] {
   }
   return result;
 };
+
+// ------------------------------------------------------------
+// Problem 10: Running Sum of 1D Array
+// runningSum[i] = sum of nums[0..i]. Returns a new array,
+// the input is not modified.
+//
+// Time:  O(n)
+// Space: O(n) for the returned array
+// ------------------------------------------------------------
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var runningSum = function (nums: number[]): number[] {
+  const result: number[] = [];
+  let sum = 0;
+  for (let i = 0; i < nums.length; i++) {
+    sum += nums[i];
+    result.push(sum);
+  }
+  return result;
+};
+
+// ------------------------------------------------------------
+// Problem 11: Richest Customer Wealth
+// Max over all customers (rows) of the sum of their accounts.
+//
+// Time:  O(m * n) — every account value visited once
+// Space: O(1)
+// ------------------------------------------------------------
+/**
+ * @param {number[][]} accounts
+ * @return {number}
+ */
+var maximumWealth = function (accounts: number[][]): number {
+  let max = 0;
+  for (const row of accounts) {
+    let wealth = 0;
+    for (const amount of row) wealth += amount;
+    if (wealth > max) max = wealth;
+  }
+  return max;
+};
+
+// ------------------------------------------------------------
+// Problem 12: Remove Duplicates from Sorted Array (in-place)
+// Two pointers: `write` marks where the next unique value goes;
+// `read` scans forward. On encountering a new unique value,
+// write it at write++ . Returns k = number of unique values.
+// No extra array is created.
+//
+// Time:  O(n)
+// Space: O(1)
+// ------------------------------------------------------------
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function (nums: number[]): number {
+  if (nums.length === 0) return 0;
+  let write = 1;
+  for (let read = 1; read < nums.length; read++) {
+    if (nums[read] !== nums[write - 1]) {
+      nums[write] = nums[read];
+      write++;
+    }
+  }
+  return write;
+};
