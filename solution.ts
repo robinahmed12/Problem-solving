@@ -322,3 +322,95 @@ var merge = function (nums1: number[], m: number, nums2: number[], n: number): v
     pos--;
   }
 };
+
+// ------------------------------------------------------------
+// Problem 16: 3Sum
+// Sort, then fix the first element nums[i] and scan with two
+// pointers (left/right). Skipping equal adjacent values at all
+// three positions guarantees unique triplets. Each element is
+// used at most once per triplet since the pointers move
+// monotonically.
+//
+// Time:  O(n^2) — O(n log n) sort + O(n) two-pointer sweep
+//        per fixed i
+// Space: O(sort) — the output array is not counted
+// ------------------------------------------------------------
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var threeSum = function (nums: number[]): number[][] {
+  const result: number[][] = [];
+  const sorted = [...nums].sort((a, b) => a - b);
+
+  for (let i = 0; i < sorted.length - 2; i++) {
+    if (sorted[i] > 0) break; // all remaining sums would be positive
+    if (i > 0 && sorted[i] === sorted[i - 1]) continue; // skip duplicate anchor
+
+    let left = i + 1;
+    let right = sorted.length - 1;
+    while (left < right) {
+      const sum = sorted[i] + sorted[left] + sorted[right];
+      if (sum < 0) left++;
+      else if (sum > 0) right--;
+      else {
+        result.push([sorted[i], sorted[left], sorted[right]]);
+        left++;
+        right--;
+        while (left < right && sorted[left] === sorted[left - 1]) left++;
+        while (left < right && sorted[right] === sorted[right + 1]) right--;
+      }
+    }
+  }
+  return result;
+};
+
+// ------------------------------------------------------------
+// Problem 17: Plus One
+// Walk from the least significant digit; a digit that is not
+// 9 just needs +1 (carry done). All trailing 9s become 0s and
+// the carry finally produces a leading 1, so the array grows
+// by one digit in that case.
+//
+// Time:  O(n)
+// Space: O(1) extra when no full carry, O(n) for the grown
+//        array case ([9..9] -> [1, 0, .., 0])
+// ------------------------------------------------------------
+/**
+ * @param {number[]} digits
+ * @return {number[]}
+ */
+var plusOne = function (digits: number[]): number[] {
+  for (let i = digits.length - 1; i >= 0; i--) {
+    if (digits[i] < 9) {
+      digits[i]++;
+      return digits;
+    }
+    digits[i] = 0; // carry continues
+  }
+  return [1, ...digits]; // every digit was 9
+};
+
+// ------------------------------------------------------------
+// Problem 18: Reverse String (in-place, void)
+// Two pointers swap characters moving toward each other from
+// the ends. No extra array is created.
+//
+// Time:  O(n)
+// Space: O(1)
+// ------------------------------------------------------------
+/**
+ * @param {string[]} s
+ * @return {void}
+ */
+var reverseString = function (s: string[]): void {
+  let left = 0;
+  let right = s.length - 1;
+  while (left < right) {
+    const tmp = s[left];
+    s[left] = s[right];
+    s[right] = tmp;
+    left++;
+    right--;
+  }
+};
