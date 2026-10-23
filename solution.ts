@@ -244,3 +244,81 @@ var removeDuplicates = function (nums: number[]): number {
   }
   return write;
 };
+
+// ------------------------------------------------------------
+// Problem 13: Contains Duplicate
+// A Set tracks seen values; the first repeat returns true.
+//
+// Time:  O(n)
+// Space: O(n) for the set
+// ------------------------------------------------------------
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var containsDuplicate = function (nums: number[]): boolean {
+  const seen = new Set<number>();
+  for (const num of nums) {
+    if (seen.has(num)) return true;
+    seen.add(num);
+  }
+  return false;
+};
+
+// ------------------------------------------------------------
+// Problem 14: Move Zeroes (in-place, void)
+// Two pointers: `write` chases `read`, copying every non-zero
+// element forward in order; remaining positions are then
+// filled with zeros. No extra array is created.
+//
+// Time:  O(n)
+// Space: O(1)
+// ------------------------------------------------------------
+/**
+ * @param {number[]} nums
+ * @return {void}
+ */
+var moveZeroes = function (nums: number[]): void {
+  let write = 0;
+  for (let read = 0; read < nums.length; read++) {
+    if (nums[read] !== 0) {
+      nums[write++] = nums[read];
+    }
+  }
+  while (write < nums.length) {
+    nums[write++] = 0;
+  }
+};
+
+// ------------------------------------------------------------
+// Problem 15: Merge Sorted Array (in-place, void)
+// Merge backwards: place the largest remaining value at the
+// last free position of nums1. Going from the end avoids
+// overwriting unprocessed elements of nums1.
+//
+// Time:  O(m + n)
+// Space: O(1)
+// ------------------------------------------------------------
+/**
+ * @param {number[]} nums1
+ * @param {number} m
+ * @param {number[]} nums2
+ * @param {number} n
+ * @return {void}
+ */
+var merge = function (nums1: number[], m: number, nums2: number[], n: number): void {
+  let i = m - 1; // last real element of nums1
+  let j = n - 1; // last element of nums2
+  let pos = m + n - 1; // last position of nums1
+
+  while (j >= 0) {
+    if (i >= 0 && nums1[i] > nums2[j]) {
+      nums1[pos] = nums1[i];
+      i--;
+    } else {
+      nums1[pos] = nums2[j];
+      j--;
+    }
+    pos--;
+  }
+};
