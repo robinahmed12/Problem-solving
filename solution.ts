@@ -71,3 +71,53 @@ var timeConversion = function (s: string): string {
 
   return `${String(hours).padStart(2, '0')}${rest}`;
 };
+
+// ------------------------------------------------------------
+// Problem 4: String Repeat
+// Repeat string s exactly n times; n = 0 returns "".
+// Preserves character order of s.
+//
+// Time:  O(n * |s|) — size of the output
+// Space: O(n * |s|) for the result string
+// ------------------------------------------------------------
+/**
+ * @param {number} n
+ * @param {string} s
+ * @return {string}
+ */
+var repeatStr = function (n: number, s: string): string {
+  return s.repeat(Math.max(0, n));
+};
+
+// ------------------------------------------------------------
+// Problem 5: Reversed Strings
+// Return a new string with the characters of str in reverse
+// order. The original string is not modified (strings are
+// immutable in JS).
+//
+// Time:  O(|str|)
+// Space: O(|str|) for the result string
+// ------------------------------------------------------------
+/**
+ * @param {string} str
+ * @return {string}
+ */
+var solution = function (str: string): string {
+  return str.split('').reverse().join('');
+};
+
+// ------------------------------------------------------------
+// Problem 6: Sum of Positive
+// Sum only the numbers strictly greater than zero.
+// Empty array or no positives -> 0.
+//
+// Time:  O(n)
+// Space: O(1)
+// ------------------------------------------------------------
+/**
+ * @param {number[]} arr
+ * @return {number}
+ */
+var positiveSum = function (arr: number[]): number {
+  return arr.reduce((sum, x) => (x > 0 ? sum + x : sum), 0);
+};
