@@ -121,3 +121,57 @@ var solution = function (str: string): string {
 var positiveSum = function (arr: number[]): number {
   return arr.reduce((sum, x) => (x > 0 ? sum + x : sum), 0);
 };
+
+// ------------------------------------------------------------
+// Problem 7: Grasshopper — Summation
+// Sum of all integers from 1 to num inclusive.
+// Uses the closed-form formula n*(n+1)/2.
+//
+// Time:  O(1)
+// Space: O(1)
+// ------------------------------------------------------------
+/**
+ * @param {number} num
+ * @return {number}
+ */
+var summation = function (num: number): number {
+  return (num * (num + 1)) / 2;
+};
+
+// ------------------------------------------------------------
+// Problem 8: Convert a Boolean to a String
+// true -> "true", false -> "false". Result must be a string.
+//
+// Time:  O(1)
+// Space: O(1)
+// ------------------------------------------------------------
+/**
+ * @param {boolean} b
+ * @return {string}
+ */
+var booleanToString = function (b: boolean): string {
+  return b ? 'true' : 'false';
+};
+
+// ------------------------------------------------------------
+// Problem 9: Fizz Buzz
+// For i = 1..n: "FizzBuzz" if divisible by 15 (checked first),
+// "Fizz" if by 3, "Buzz" if by 5, else String(i).
+//
+// Time:  O(n)
+// Space: O(n) for the result array
+// ------------------------------------------------------------
+/**
+ * @param {number} n
+ * @return {string[]}
+ */
+var fizzBuzz = function (n: number): string[] {
+  const result: string[] = [];
+  for (let i = 1; i <= n; i++) {
+    if (i % 15 === 0) result.push('FizzBuzz');
+    else if (i % 3 === 0) result.push('Fizz');
+    else if (i % 5 === 0) result.push('Buzz');
+    else result.push(String(i));
+  }
+  return result;
+};
